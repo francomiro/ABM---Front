@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>hola</h1>
+<div mat-dialog-content>
+    <form (ngSubmit)="editarPersona()">
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="data.persona.perNombre" name="perNombre" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Apellido</mat-label>
+        <input matInput [(ngModel)]="data.persona.perApellido" name="perApellido" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput [(ngModel)]="data.persona.perFechaNacimiento" name="perFechaNacimiento" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Tipo de Documento</mat-label>
+        <input matInput [(ngModel)]="data.persona.perTipoDocumento" name="perTipoDocumento" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Número de Documento</mat-label>
+        <input matInput [(ngModel)]="data.persona.perNumeroDocumento" name="perNumeroDocumento" required>
+      </mat-form-field>
+    
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Cancelar</button>
+  <button mat-button type="submit" >Guardar</button>
+</div>

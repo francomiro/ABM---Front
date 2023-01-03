@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Persona } from '../model/persona';
 import { TipoDocumento } from '../model/tipo-documento';
 import { PersonaService } from '../service/persona.service';
+import { PopupEditComponent } from '../popup-edit/popup-edit.component';
 
 @Component({
   selector: 'app-buscar-personas',
@@ -35,7 +37,7 @@ export class BuscarPersonasComponent implements OnInit{
     {valor: 'CEDULA', visual:'Cedula'},
   ];
 
-  constructor(private personaService: PersonaService){
+  constructor(public dialog:MatDialog,private personaService: PersonaService){
     this.cargarTodasLasPersonas();
     this.persona = new Persona();
   }
@@ -82,7 +84,9 @@ export class BuscarPersonasComponent implements OnInit{
     let personaAEdit = this.personas.find(persona => persona.id === id);
     if(personaAEdit != undefined){
       this.persona = personaAEdit;
-      this.modalAbierto = true;
+      this.modalAbierto = false;
+      const dialogRef = this.dialog.open(PopupEditComponent,{data:{persona:this.persona}});
+      dialogRef.afterClosed().subscribe(res => {console.log(res)});
     }
     
   }

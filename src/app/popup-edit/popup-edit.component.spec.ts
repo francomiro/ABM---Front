@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreatePersonaComponent } from './create-persona.component';
+import { PopupEditComponent } from './popup-edit.component';
 
-describe('CreatePersonaComponent', () => {
-  let component: CreatePersonaComponent;
-  let fixture: ComponentFixture<CreatePersonaComponent>;
+describe('PopupEditComponent', () => {
+  let component: PopupEditComponent;
+  let fixture: ComponentFixture<PopupEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreatePersonaComponent ]
+      declarations: [ PopupEditComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CreatePersonaComponent);
+    fixture = TestBed.createComponent(PopupEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

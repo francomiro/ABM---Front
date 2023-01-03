@@ -14,15 +14,19 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { BuscarPersonasComponent } from './buscar-personas/buscar-personas.component';
 import {MatSelectModule} from '@angular/material/select';
-import { CreatePersonaComponent } from './create-persona/create-persona.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { PopupComponent } from './popup/popup.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PopupEditComponent } from './popup-edit/popup-edit.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BuscarPersonasComponent,
-    CreatePersonaComponent
+    PopupComponent,
+    PopupEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatSelectModule,
     MatIconModule,
+    MatToolbarModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

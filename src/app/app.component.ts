@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Persona } from './model/persona';
 import { PersonaService } from './service/persona.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from './popup/popup.component';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +14,9 @@ export class AppComponent {
   modalAbierto = false;
   persona: Persona;
 
-  constructor(private personaService:PersonaService){
+  constructor(private personaService:PersonaService, public dialog:MatDialog){
     this.persona = new Persona();
+
   }
   public createPersona(){
 
@@ -25,4 +28,11 @@ export class AppComponent {
   abrirModal() {
     this.modalAbierto = true;
   }
+
+  openDialog():void{
+    const dialogRef = this.dialog.open(PopupComponent,{});
+    dialogRef.afterClosed().subscribe(res => {console.log(res)});
+  }
+
+
 }

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
 
 <html lang="en">
 <head>
@@ -8,43 +12,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<header>
+  <mat-toolbar color="primary">
+    <span >{{title}}</span>
+  </mat-toolbar>
+</header>
 <body>
-    <h1>{{title}}</h1>
-    <button mat-raised-button color="Accent" (click)="abrirModal()">+Nuevo</button>
+  <div class="container">
 
-    <div class="modal" *ngIf="modalAbierto">
-        <!-- aquí va el contenido del modal -->
-
-        <form (ngSubmit)="createPersona()">
-            <mat-form-field>
-              <mat-label>Nombre</mat-label>
-              <input matInput [(ngModel)]="persona.perNombre" name="perNombre" required>
-            </mat-form-field>
-          
-            <mat-form-field>
-              <mat-label>Apellido</mat-label>
-              <input matInput [(ngModel)]="persona.perApellido" name="perApellido" required>
-            </mat-form-field>
-          
-            <mat-form-field>
-              <mat-label>Fecha de Nacimiento</mat-label>
-              <input matInput [(ngModel)]="persona.perFechaNacimiento" name="perFechaNacimiento" required>
-            </mat-form-field>
-          
-            <mat-form-field>
-              <mat-label>Tipo de Documento</mat-label>
-              <input matInput [(ngModel)]="persona.perTipoDocumento" name="perTipoDocumento" required>
-            </mat-form-field>
-          
-            <mat-form-field>
-              <mat-label>Número de Documento</mat-label>
-              <input matInput [(ngModel)]="persona.perNumeroDocumento" name="perNumeroDocumento" required>
-            </mat-form-field>
-          
-            <button mat-raised-button color="primary" type="submit">Agregar</button>
-          </form>
-        <button (click)="modalAbierto = false">Cerrar</button>
+  <div>
+    <div style="text-align: right;margin-right: 30px; padding-top: 10px;" >
+      <button  mat-raised-button color="primary" (click)="openDialog()">+Nueva</button>
     </div>
+ </div>
+  </div>
+
 <app-buscar-personas>
     
 </app-buscar-personas>
