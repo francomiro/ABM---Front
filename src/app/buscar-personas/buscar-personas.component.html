@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        Buscar persona:
+    </div>
+    <form class="busqueda-form">
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Ej: Franco Miro" [(ngModel)]="nombreSeleccionado" name="Nombre">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Tipo Documento</mat-label>
+          <mat-select [(ngModel)]="tipoDocumentoSeleccionado" name="Tipo Docuemento">
+            <mat-option *ngFor="let tipoDoc of tipoDocs" [value]="tipoDoc.valor">
+              {{tipoDoc.visual}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="buscarPersona()">Buscar</button>
+      
+      </form>
+
+    <div *ngIf="mostrarResultados()">
+      <!-- <mat-form-field >
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+      </mat-form-field> -->
+    
+    <table mat-table [dataSource]="personas" class="mat-elevation-z8">
+    
+      <!-- Position Column -->
+      <ng-container matColumnDef="ID">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.perNombre}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="Apellido">
+        <th mat-header-cell *matHeaderCellDef> Apellido </th>
+        <td mat-cell *matCellDef="let element"> {{element.perApellido}} </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="Fecha de Nacimiento">
+        <th mat-header-cell *matHeaderCellDef> Fecha de Nacimiento </th>
+        <td mat-cell *matCellDef="let element"> {{element.perFechaNacimiento}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="Tipo Documento">
+        <th mat-header-cell *matHeaderCellDef> Tipo Documento </th>
+        <td mat-cell *matCellDef="let element"> {{element.perTipoDocumento}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="Numero Documento">
+        <th mat-header-cell *matHeaderCellDef> Numero Documento </th>
+        <td mat-cell *matCellDef="let element"> {{element.perNumeroDocumento}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Editar">
+        <th mat-header-cell *matHeaderCellDef> Editar </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon (click)="openFormEditPersona(element.id)">create</mat-icon>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Borrar">
+        <th mat-header-cell *matHeaderCellDef> Borrar </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon (click)="borrarPersona(element.id)">delete</mat-icon>
+        </td>
+      </ng-container>
+               
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+      <!-- Row shown when there is no matching data. -->
+      <!-- <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="6">No data matching the filter "{{input.value}}"</td>
+      </tr> -->
+    </table>
+  </div>
+  <div *ngIf="errorMsg">No se encontraron personas</div>
+
+  <div class="modal" *ngIf="modalAbierto">
+    <!-- aquí va el contenido del modal -->
+
+    <form (ngSubmit)="editarPersona()">
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input matInput [(ngModel)]="persona.perNombre" name="perNombre" required>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <mat-label>Apellido</mat-label>
+          <input matInput [(ngModel)]="persona.perApellido" name="perApellido" required>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [(ngModel)]="persona.perFechaNacimiento" name="perFechaNacimiento" required>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <mat-label>Tipo de Documento</mat-label>
+          <input matInput [(ngModel)]="persona.perTipoDocumento" name="perTipoDocumento" required>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <mat-label>Número de Documento</mat-label>
+          <input matInput [(ngModel)]="persona.perNumeroDocumento" name="perNumeroDocumento" required>
+        </mat-form-field>
+      
+        <button mat-raised-button color="primary" type="submit">Agregar</button>
+      </form>
+    <button (click)="modalAbierto = false">Cerrar</button>
+</div>
+</body>
+</html>
