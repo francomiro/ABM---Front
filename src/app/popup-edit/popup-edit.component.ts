@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Persona } from '../model/persona';
+import { TipoDocumento } from '../model/tipo-documento';
 import { PopupComponent } from '../popup/popup.component';
 import { PersonaService } from '../service/persona.service';
 
@@ -12,7 +13,6 @@ import { PersonaService } from '../service/persona.service';
 })
 export class PopupEditComponent {
 
-  // persona: Persona;
   todasLasPersonas:Persona[] = [];
   personas: Persona[] = [];
 
@@ -20,13 +20,16 @@ export class PopupEditComponent {
   constructor(private personaService:PersonaService,
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {persona:Persona}) {
-      // this.persona = new Persona();
-    
     }
 
   ngOnInit(): void {
     
   }
+  tipoDocs: TipoDocumento[] = [
+    {valor: 'DNI' , visual:'DNI'},
+    {valor: 'PASAPORTE', visual:'Pasaporte'},
+    {valor: 'CEDULA', visual:'Cedula'},
+  ];
 
   onNoClick():void{
     this.dialogRef.close();

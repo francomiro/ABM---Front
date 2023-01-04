@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Persona } from '../model/persona';
+import { TipoDocumento } from '../model/tipo-documento';
 import { PersonaService } from '../service/persona.service';
 
 @Component({
@@ -20,19 +21,25 @@ export class PopupComponent implements OnInit{
     }
 
   ngOnInit(): void {
-    
   }
+  
+  tipoDocs: TipoDocumento[] = [
+    {valor: 'DNI' , visual:'DNI'},
+    {valor: 'PASAPORTE', visual:'Pasaporte'},
+    {valor: 'CEDULA', visual:'Cedula'},
+  ];
 
   onNoClick():void{
     this.dialogRef.close();
-
   }
 
   public createPersona(){
-
     this.personaService.createPersona(this.persona).subscribe(response => {
     console.info(response);
   })
+  setInterval(() => {
+    window.location.reload();
+  }, 500)
   }
 
 }

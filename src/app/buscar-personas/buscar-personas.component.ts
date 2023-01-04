@@ -5,6 +5,7 @@ import { Persona } from '../model/persona';
 import { TipoDocumento } from '../model/tipo-documento';
 import { PersonaService } from '../service/persona.service';
 import { PopupEditComponent } from '../popup-edit/popup-edit.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-buscar-personas',
@@ -15,20 +16,17 @@ export class BuscarPersonasComponent implements OnInit{
 
   persona:Persona;
   todasLasPersonas:Persona[] = [];
-  modalAbierto = false;
-
+  busquedaRealizada:Boolean = false;
   errorMsg: Boolean = false;
   displayedColumns: string[] = ['ID', 'Nombre', 'Apellido', 'Fecha de Nacimiento', 'Tipo Documento', 'Numero Documento', 'Editar','Borrar'];
-  
+  formattedDate: string = "";
+  valor: string = "";
+  tipoDocumentoSeleccionado: string = "";
+  nombreSeleccionado: string ="";
   personas: Persona[] = [];
   dataSource = new MatTableDataSource<Persona>([]);
 
-  // dataSource = new MatTableDataSource(this.personas);
   @ViewChild(MatTable, {static: true}) table: MatTable<any> | undefined;
-
-  public valor: string = "";
-  public tipoDocumentoSeleccionado: string = "";
-  public nombreSeleccionado: string ="";
 
   tipoDocs: TipoDocumento[] = [
     {valor: '', visual:'Todos'},
@@ -37,18 +35,17 @@ export class BuscarPersonasComponent implements OnInit{
     {valor: 'CEDULA', visual:'Cedula'},
   ];
 
-  constructor(public dialog:MatDialog,private personaService: PersonaService){
+  constructor(public dialog:MatDialog,private personaService: PersonaService,public datePipe: DatePipe){
     this.cargarTodasLasPersonas();
     this.persona = new Persona();
+    this.datePipe = datePipe;
   }
 
   ngOnInit(): void {
-
     this.errorMsg = false;  
   }
 
   cargarTodasLasPersonas(){
-
     this.personaService.listaDePersonas().subscribe(response => {
       console.info(response);
       this.todasLasPersonas = response;
@@ -60,14 +57,8 @@ export class BuscarPersonasComponent implements OnInit{
     this.personaService.busquedaDePersonas(this.nombreSeleccionado,this.tipoDocumentoSeleccionado).subscribe(response => {
       console.info(response);
       this.personas = response;
+      this.busquedaRealizada = true;
     })
-
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.info(this.dataSource.filter);
   }
 
   mostrarResultados() {
@@ -84,22 +75,12 @@ export class BuscarPersonasComponent implements OnInit{
     let personaAEdit = this.personas.find(persona => persona.id === id);
     if(personaAEdit != undefined){
       this.persona = personaAEdit;
-      this.modalAbierto = false;
       const dialogRef = this.dialog.open(PopupEditComponent,{data:{persona:this.persona}});
       dialogRef.afterClosed().subscribe(res => {console.log(res)});
     }
     
   }
 
-  public editarPersona(){
-
-    this.personaService.editarPersona(this.persona).subscribe(response => {
-    })
-    setInterval(() => {
-      window.location.reload();
-   }, 500)
-
-  }
   public borrarPersona(id: number){
     let resultado = "";
     this.personaService.borrarPersona(id).subscribe(response => {
@@ -111,5 +92,4 @@ export class BuscarPersonasComponent implements OnInit{
    }, 500)
   }
   
-
 }

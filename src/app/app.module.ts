@@ -19,7 +19,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { PopupComponent } from './popup/popup.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { PopupEditComponent } from './popup-edit/popup-edit.component';
-
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -43,8 +45,12 @@ import { PopupEditComponent } from './popup-edit/popup-edit.component';
     MatIconModule,
     MatToolbarModule,
     MatDialogModule,
+    MatNativeDateModule,
+    MatDatepickerModule,  
+    CommonModule,
+    
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

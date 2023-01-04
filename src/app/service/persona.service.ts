@@ -28,10 +28,12 @@ export class PersonaService {
   return this.httpClient.get<Persona[]>(this.urlBase + 'find/', { params });
   }
 
+  //borra persona por id
   borrarPersona(id:number):Observable<string>{
   return this.httpClient.delete<string>(this.urlBase + id);
   }
 
+  //crea persona nueva
   createPersona(persona:Persona):Observable<string>{
     const request = {
       perApellido: persona.perApellido,
@@ -44,6 +46,7 @@ export class PersonaService {
     return this.httpClient.post<string>(this.urlBase, request );
   }
 
+  //edita persona
   editarPersona(persona:Persona):Observable<string>{
     const request = {
       id:persona.id,
