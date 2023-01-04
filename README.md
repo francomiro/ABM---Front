@@ -1,5 +1,19 @@
 # AbmFront
 
+
+# Imagenes ilustrativas:
+Home de la web
+![alt text](https://github.com/francomiro/ABM---Front/blob/main/src/assets/MAIN.jpg)
+
+Busqueda de personas
+![alt text](https://github.com/francomiro/ABM---Front/blob/main/src/assets/BUSQUEDA.jpg?raw=true)
+
+Crear persona
+![alt text](https://github.com/francomiro/ABM---Front/blob/main/src/assets/CREAR-PERSONA.jpg)
+
+Editar Persona
+![alt text](https://github.com/francomiro/ABM---Front/blob/main/src/assets/EDITAR-PERSONA.jpg)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
 
 ## Development server
