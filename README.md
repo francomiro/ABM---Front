@@ -2,8 +2,6 @@
 
 
 # Imagenes ilustrativas:
-Home de la web
-![alt text](https://github.com/francomiro/ABM---Front/blob/main/src/assets/MAIN.jpg)
 
 Busqueda de personas
 ![alt text](https://github.com/francomiro/ABM---Front/blob/main/src/assets/BUSQUEDA.jpg?raw=true)
